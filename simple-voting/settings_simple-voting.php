@@ -1,6 +1,6 @@
 <?php
 include("../db-connect.php");
-
+$saved_voting = false;
 if(!empty($_POST['set'])){   
         for($i=0; $i<=$_POST['fieldindex']; $i++){
             $field = "field" . ($i+1);
@@ -10,7 +10,7 @@ if(!empty($_POST['set'])){
         $query = "INSERT INTO settings_simple (umfragename, beschreibung, auswahl, userstimmen) VALUES ('" . $_POST['voting-name'] . "','" . $_POST['description'] . "','" . $field_string . "','" . $_POST['votings'] . "')";
         $insert = $mysqli->query($query);
         if($insert){
-            echo "Die Umfrage wurde gespeichert";
+            $saved_voting = true;
         }else{
             die("Error: {$mysqli->errno} : {$mysqli->error}");
         }
@@ -70,6 +70,13 @@ if(!empty($_POST['set'])){
                     <input type="submit" name="set" id="set" value="Bestätigen">
                 </form>
             </div>
+            <?php 
+            if($saved_voting == true){
+                echo '<div class="push-3 col-4">';
+                echo 'Die Umfrage wurde gespeichert';
+                echo '</div>';      
+            }
+            ?>
         </div>
 
     </div>
@@ -105,9 +112,11 @@ if(!empty($_POST['set'])){
             var errmsg = "";
             if(document.getElementById("votingName").value == ""){
                 errmsg += "- Die Umfrage braucht einen Namen <br>";
+                valide = false;
             }
             if(document.getElementById("field1").value == "" || document.getElementById("field2").value == "" ){
                 errmsg += "- Es müssen mindestens zwei Optionen zu Auswahl stehen";
+                valide = false;
             }
             if(!valide){
             alert(errmsg);
@@ -115,8 +124,6 @@ if(!empty($_POST['set'])){
             }
             
         });
-        
-
     </script>
 </body>
 
