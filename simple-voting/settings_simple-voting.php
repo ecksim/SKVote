@@ -19,12 +19,31 @@ if(!empty($_POST['set'])){
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <title>Einfaches Voting</title>
     <link rel="stylesheet" type="text/css" href="../master.css">
-    <link rel="stylesheet" type="text/css" href="../shift-2017_grid.css">  
+    <link rel="stylesheet" type="text/css" href="../shift-2017_grid.css">
+    <style>
+        .error-div {
+            background-color: #ff5335;
+            color: #fff;
+            display: none;
+            height: fit-content;
+            padding: 20px;
+        }
+
+        .success-div {
+            background-color: #4bca81;
+            color: #fff;
+            height: fit-content;
+            padding: 20px;
+        }
+
+    </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class=container>
@@ -48,9 +67,9 @@ if(!empty($_POST['set'])){
                     <h2>Name des Votings</h2>
 
                     <input type="text" name="voting-name" id="votingName">
-                    
+
                     <h2>Berschreibung (optional)</h2>
-                    
+
                     <textarea name="description"></textarea>
 
                     <h2>Geben Sie die Punkte an, die zur Auswahl stehen sollen</h2>
@@ -71,24 +90,31 @@ if(!empty($_POST['set'])){
                 </form>
             </div>
             <?php 
-            if($saved_voting == true){
-                echo '<div class="push-3 col-4">';
-                echo 'Die Umfrage wurde gespeichert';
-                echo '</div>';      
+            if($saved_voting == true){  
+                echo '<div class="col-12 col-md-4">';
+                echo '<div class="success-div" id="successDiv">';
+                echo "<h4>Die Umfrage wurde gespeichert</h4>";
+                echo "</div>";
+                echo "</div>";
             }
             ?>
+            <div class="col-12 col-md-4">
+                <div class="error-div" id="errorDiv">
+                    <h4>Fehlermeldungen: </h4><br>
+                    <div id="errorMsg"></div>
+                </div>
+            </div>
         </div>
-
     </div>
 
     <script>
         var addButton = document.getElementById("add");
         var removeButton = document.getElementById("remove");
         var set = document.getElementById("set");
-        var fields = document.getElementById("fieldsDiv");        
+        var fields = document.getElementById("fieldsDiv");
         var i = 1;
         var votings = document.getElementById("votings");
-        
+
         addButton.addEventListener("click", function() {
             i++;
             var newInput = document.createElement("input");
@@ -110,20 +136,26 @@ if(!empty($_POST['set'])){
             document.getElementById("fieldindex").value = i;
             var valide = true;
             var errmsg = "";
-            if(document.getElementById("votingName").value == ""){
+            if (document.getElementById("votingName").value == "") {
                 errmsg += "- Die Umfrage braucht einen Namen <br>";
                 valide = false;
             }
-            if(document.getElementById("field1").value == "" || document.getElementById("field2").value == "" ){
+            if (document.getElementById("field1").value == "" || document.getElementById("field2").value == "") {
                 errmsg += "- Es müssen mindestens zwei Optionen zu Auswahl stehen";
                 valide = false;
             }
-            if(!valide){
-            alert(errmsg);
-            e.preventDefault();
+            if (!valide) {
+                document.getElementById("errorMsg").innerHTML = errmsg;
+                var sucmsg = document.getElementById("successDiv");
+                if(sucmsg != null){
+                document.getElementById("successDiv").style.display = "none";                    
+                }
+                document.getElementById("errorDiv").style.display = "block";
+                e.preventDefault();
             }
-            
+
         });
+
     </script>
 </body>
 
