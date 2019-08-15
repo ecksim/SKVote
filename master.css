@@ -927,7 +927,7 @@ input.switch-slider.round + label:after {
     width: 100%;
 }
 
-input {
+input, textarea {
     display: block;
     margin: 10px 0;
     width: 100%;
@@ -964,13 +964,15 @@ input#remove {
 }
 
 .navbar a {
-    position: absolute;
-    right: 0;
+    right: 10px;
+    padding: 15px 8px;
+    display: inline-block;
 }
 
 .voting-form {
     width: 100%;
 }
+
 .voting-li {
     background: #f7f7f7;
     border: 1px solid #dbdbdb;
@@ -978,13 +980,32 @@ input#remove {
     padding: 10px;
     font-size: 20px;
 }
+
 .voting-li:hover {
     background: #ffffff;
 }
+
 .voting-li a {
     position: relative;
     display: block;
 }
-input[type=submit], input[type=button]{
+
+input[type=submit],
+input[type=button] {
     cursor: pointer;
+}
+
+.error-div {
+    background-color: #ff5335;
+    color: #fff;
+    display: none;
+    height: fit-content;
+    padding: 20px;
+}
+
+.success-div {
+    background-color: #4bca81;
+    color: #fff;
+    height: fit-content;
+    padding: 20px;
 }
