@@ -25,21 +25,7 @@ if(!empty($_POST['set'])){
     <title>Einfaches Voting</title>
     <link rel="stylesheet" type="text/css" href="../master.css">
     <link rel="stylesheet" type="text/css" href="../shift-2017_grid.css">
-    <style>
-        .error-div {
-            background-color: #ff5335;
-            color: #fff;
-            display: none;
-            height: fit-content;
-            padding: 20px;
-        }
-
-        .success-div {
-            background-color: #4bca81;
-            color: #fff;
-            height: fit-content;
-            padding: 20px;
-        }
+    <style>   
 
     </style>
 </head>
@@ -48,23 +34,29 @@ if(!empty($_POST['set'])){
     <nav class="navbar">
         <div class=container>
             <div class="row">
-                <div class="navbar-logo">
+                <div class="navbar-logo col-md-6 col-12">
                     <img alt="SÜDKURIER" src="https://cdn.suedkurier.de/content/images/logos/SK_LOGO_schwarz.svg">
                     <span>Vote</span>
-                </div>
-                <a href="listing_simple-voting.php" title="Aktive Votings" class="active-votings">Aktive Votings</a>
+                </div> 
+               <div class="col-md-6 col-12">
+                   <a href="listing_simple-voting.php" title="Aktive Votings" class="active-votings">Liste Votings</a>
+                   <a href="listing_simple-chart.php" title="Aktive Auswertungen" class="active-votings">Liste Auswertungen</a>
+               </div>               
             </div>
+            
+                
+            
         </div>
     </nav>
     <div class="container">
         <div class="row">
             <header class="col-12">
-                <h1>Einfache Abstimmung</h1>
+                <h1>Einstellungen für einfache Abstimmung</h1>
             </header>
             <div class="col-12 col-md-6">
                 <form method="post" class="voting-form">
 
-                    <h2>Name des Votings</h2>
+                    <h2>Titel der Abstimmung</h2>
 
                     <input type="text" name="voting-name" id="votingName">
 
